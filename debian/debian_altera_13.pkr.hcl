@@ -38,6 +38,7 @@ source "virtualbox-iso" "debian-virtualbox" {
   guest_additions_path = "/tmp/VBoxGuestAdditions.iso"
   memory = 1024
   headless = true
+  usb = true
   http_directory = "."
   boot_wait = "5s"
   boot_command = [
@@ -57,6 +58,15 @@ build {
   source "source.virtualbox-iso.debian-virtualbox" {
     disk_size = 30000
     vm_name = "forsyde-debian-altera13"
+    vboxmanage = [
+      ["usbfilter", "add", "0", "--target", "{{ .Name }}", "--name", "Altera Blaster [6001]", "--vendorid", "09fb", "--productid", "6001", "--manufacturer", "Altera", "--product", "USB-Blaster"],
+      ["usbfilter", "add", "0", "--target", "{{ .Name }}", "--name", "Altera Blaster [6002]", "--vendorid", "09fb", "--productid", "6002", "--manufacturer", "Altera", "--product", "USB-Blaster"],
+      ["usbfilter", "add", "0", "--target", "{{ .Name }}", "--name", "Altera Blaster [6003]", "--vendorid", "09fb", "--productid", "6003", "--manufacturer", "Altera", "--product", "USB-Blaster"],
+      ["usbfilter", "add", "0", "--target", "{{ .Name }}", "--name", "Altera Blaster [6010]", "--vendorid", "09fb", "--productid", "6010", "--manufacturer", "Altera", "--product", "USB-Blaster"],
+      ["usbfilter", "add", "0", "--target", "{{ .Name }}", "--name", "Altera Blaster [6810]", "--vendorid", "09fb", "--productid", "6810", "--manufacturer", "Altera", "--product", "USB-Blaster"],
+      ["modifyvm", "{{ .Name }}", "--usbohci", "on"],
+      ["modifyvm", "{{ .Name }}", "--usbehci", "on"]
+    ]
   }
 
   provisioner "shell" {
