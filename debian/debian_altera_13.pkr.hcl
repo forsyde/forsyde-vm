@@ -55,6 +55,20 @@ source "virtualbox-iso" "debian-virtualbox" {
 
 build {
 
+    // install sudo at least
+  provisioner "shell" {
+    inline = [
+      "su - root <<!",
+      "forsyde",
+      "apt-get install sudo",
+      "usermod -aG sudo packer",
+      "echo 'packer ALL=(ALL) NOPASSWD:ALL' > /etc/sudoers.d/packer",
+      "chmod 440 /etc/sudoers.d/packer",
+      "!"
+    ]
+  }
+
+
   source "source.virtualbox-iso.debian-virtualbox" {
     disk_size = 30000
     vm_name = "forsyde-debian-altera13"

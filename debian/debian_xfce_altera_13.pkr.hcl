@@ -42,9 +42,13 @@ source "virtualbox-iso" "debian-virtualbox" {
   http_directory = "."
   boot_wait = "5s"
   boot_command = [
+    // enter past splash screen
     "A<enter>", 
     "A<enter>", 
+    // enter preseed
     "<wait50s>http://{{ .HTTPIP }}:{{ .HTTPPort }}/debian-preseed.txt<enter>",
+    // enter root passwd
+    "<wait120s>forsyde<enter>forsyde<enter>",
     "<wait5s><enter><enter>"
     // this last enter is for "Unable is to skip the harmless CD error"
     # "<wait95s><enter>"
@@ -66,6 +70,19 @@ build {
       ["usbfilter", "add", "0", "--target", "{{ .Name }}", "--name", "Altera Blaster [6810]", "--vendorid", "09fb", "--productid", "6810", "--manufacturer", "Altera", "--product", "USB-Blaster"],
       ["modifyvm", "{{ .Name }}", "--usbohci", "on"],
       ["modifyvm", "{{ .Name }}", "--usbehci", "on"]
+    ]
+  }
+
+  // install sudo at least
+  provisioner "shell" {
+    inline = [
+      "su - root <<!",
+      "forsyde",
+      "apt-get install sudo",
+      "usermod -aG sudo packer",
+      "echo 'packer ALL=(ALL) NOPASSWD:ALL' > /etc/sudoers.d/packer",
+      "chmod 440 /etc/sudoers.d/packer",
+      "!"
     ]
   }
 
