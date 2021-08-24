@@ -1,6 +1,6 @@
 variable "altera_13_download_url" {
   type = string
-  default = "https://download.altera.com/akdlm/software/acdsinst/13.0sp1/232/ib_tar/Quartus-web-13.0.1.232-linux.tar"
+  default = "https://deb.debian.org/debian/dists/stable/main/installer-amd64/current/images/netboot/mini.iso"
 }
 
 variable "altera_13_local_tarfile" {

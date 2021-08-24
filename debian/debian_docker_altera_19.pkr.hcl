@@ -1,6 +1,6 @@
 variable "altera_19_download_url" {
   type = string
-  default = "https://download.altera.com/akdlm/software/acdsinst/19.1std/670/ib_tar/Quartus-lite-19.1.0.670-linux.tar"
+  default = "https://deb.debian.org/debian/dists/stable/main/installer-amd64/current/images/netboot/mini.iso"
 }
 
 variable "altera_19_local_tarfile" {

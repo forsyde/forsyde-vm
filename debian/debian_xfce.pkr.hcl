@@ -1,6 +1,6 @@
 variable "debian_iso_url" {
   type = string
-  default = "https://cdimage.debian.org/cdimage/unofficial/non-free/cd-including-firmware/10.9.0+nonfree/multi-arch/iso-cd/firmware-10.9.0-amd64-i386-netinst.iso"
+  default = "https://deb.debian.org/debian/dists/stable/main/installer-amd64/current/images/netboot/mini.iso"
 }
 
 variable "debian_iso_url_md5" {
