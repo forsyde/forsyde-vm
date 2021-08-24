@@ -60,6 +60,8 @@ build {
       "forsyde",
       "apt-get install sudo",
       "usermod -aG sudo packer",
+      "echo 'packer ALL=(ALL) NOPASSWD:ALL' > /etc/sudoers.d/packer",
+      "chmod 440 /etc/sudoers.d/packer",
       "!"
     ]
   }
