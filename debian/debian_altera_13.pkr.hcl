@@ -5,7 +5,7 @@ variable "debian_iso_url" {
 
 variable "debian_iso_url_md5" {
   type = string
-  default = "f1a1d3193bdaa26a217c4c8b61bbff9e"
+  default = "9d197756250b57c5af4848925debe3fd"
 }
 
 variable "altera_13_download_url" {

@@ -20,7 +20,7 @@ variable "altera_19_use_local" {
 
 variable "debian_iso_url_md5" {
   type = string
-  default = "ff7205a14937f1f34be84f4663d3c769"
+  default = "9d197756250b57c5af4848925debe3fd"
 }
 
 locals {
