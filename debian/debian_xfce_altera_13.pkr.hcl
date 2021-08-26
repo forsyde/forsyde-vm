@@ -60,7 +60,7 @@ source "virtualbox-iso" "debian-virtualbox" {
 build {
 
   source "source.virtualbox-iso.debian-virtualbox" {
-    disk_size = 30000
+    disk_size = 40000
     vm_name = "forsyde-debian-altera13"
     vboxmanage = [
       ["usbfilter", "add", "0", "--target", "{{ .Name }}", "--name", "Altera Blaster [6001]", "--vendorid", "09fb", "--productid", "6001", "--manufacturer", "Altera", "--product", "USB-Blaster"],
