@@ -43,6 +43,8 @@ apt-get install -y libxrender1:i386
 apt-get install -y libxt6:i386
 apt-get install -y libxtst6:i386
 apt-get install -y zlib1g:i386
+apt-get install -y openjdk-11-jdk
+apt-get install -y openjdk-11-jre
 
 # install vbox guest additions
 mkdir /tmp/vboxguest
