@@ -1,11 +1,11 @@
 variable "debian_iso_url" {
   type = string
-  default = "https://deb.debian.org/debian/dists/stable/main/installer-amd64/current/images/netboot/mini.iso"
+  default = "https://cdimage.debian.org/debian-cd/current/amd64/iso-cd/debian-11.6.0-amd64-netinst.iso"
 }
 
 variable "debian_iso_checksum" {
   type = string
-  default = "file:http://ftp.debian.org/debian/dists/stable/main/installer-amd64/current/images/SHA256SUMS"
+  default = "file:https://cdimage.debian.org/debian-cd/current/amd64/iso-cd/SHA256SUMS"
 }
 
 locals {
@@ -22,12 +22,10 @@ source "virtualbox-iso" "debian-virtualbox" {
   guest_additions_path = "/tmp/VBoxGuestAdditions.iso"
   memory = 1024
   headless = true
-  http_directory = "."
+  http_directory = "http"
   boot_wait = "5s"
   boot_command = [
-    "A<enter>", 
-    "A<enter>", 
-    "<wait60s>http://{{ .HTTPIP }}:{{ .HTTPPort }}/debian-preseed.txt<enter>"
+    "<esc><esc>auto url=http://{{ .HTTPIP }}:{{ .HTTPPort }}/debianpreseed.cfg<enter><wait60s>"
     # "<wait80s><enter><enter>" // for no root password
     # "<wait95s><enter>"  // this last enter is for "Unable is to skip the harmless CD error"
   ]
@@ -55,7 +53,9 @@ build {
     disk_size = 30000
     vm_name = "forsyde-debian-xfce"
     vboxmanage = [
-      ["modifyvm", "{{ .Name }}", "--cpus", "1"],
+      ["modifyvm", "{{ .Name }}", "--cpus", "2"],
+    ]
+    vboxmanage_post = [
       ["modifyvm", "{{ .Name }}", "--vram", "56"],
       ["modifyvm", "{{ .Name }}", "--memory", "1024"],
       ["usbfilter", "add", "0", "--target", "{{ .Name }}", "--name", "Altera Blaster [6001]", "--vendorid", "09fb", "--productid", "6001", "--manufacturer", "Altera", "--product", "USB-Blaster"],
